@@ -34,14 +34,7 @@ class Article < ActiveRecord::Base
   
   # self.include_root_in_json = false (necessary before Rails 3.1)
   def to_indexed_json
-    to_json(methods: [:author_name, :comments_count])
+    to_json( include: { comments: { only: [:content, :name] }, author: { only: [:name]} } )
   end
   
-  def author_name
-    author.name
-  end
-  
-  def comments_count
-    comments.size
-  end
 end
