@@ -12,9 +12,9 @@
   <ul>
     <% @articles.facets['authors']['terms'].each do |facet| %>
       <li>
-        <%= link_to_unless_current Author.find(facet['term']).name, params.merge(author_id: facet['term']) %>
-        <% if params[:author_id] == facet['term'].to_s %>
-          (<%= link_to "remove", author_id: nil %>)
+        <%= link_to_unless_current facet['term'], params.merge(author: facet['term']) %>
+        <% if params[:author] == facet['term'].to_s %>
+          (<%= link_to "remove", params.merge(author: nil) %>)
         <% else %>
           (<%= facet['count'] %>)
         <% end %>
